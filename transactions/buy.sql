@@ -1,6 +1,6 @@
 BEGIN;
     -- new order
-    INSERT INTO orders(customer_pid, item_pid, price) VALUES(2, 3, (SELECT price FROM items WHERE pid = 3));
+    INSERT INTO orders(customer_pid, item_pid, seller_pid, price) VALUES(2, 3, (SELECT seller_pid FROM items WHERE pid = 3), (SELECT price FROM items WHERE pid = 3));
 
     -- minus item price from customer balance
     UPDATE customers SET balance = balance - (SELECT price FROM items WHERE pid = 3) WHERE pid = 2;
