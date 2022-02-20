@@ -5,7 +5,7 @@ from populate_sel import populate_sellers
 
 if __name__ == '__main__':
 
-    conn_data = ConnectionData(host="127.0.0.1", port=54321, dbname="shop", user="shop_admin", password="1234")
+    conn_data = ConnectionData(host="127.0.0.1", port=5432, dbname="shop", user="shop_admin", password="1234")
     db = PostgreSQL(conn_data)
     populate_customers(db)
     populate_sellers(db)
