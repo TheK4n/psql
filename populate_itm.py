@@ -16,9 +16,9 @@ def add_item(database, name, price, seller_pid, amount):
         print("[ERROR] Adding item: ", name, price, seller_pid, amount)
         print(str(e))
     else:
-        print("[OK] Adding item:", name, price, seller_pid, amount)
         database.conn.commit()
         cursor.close()
+        print("[OK] Adding item:", name, price, seller_pid, amount)
 
 
 def populate_items_for_seller(database: PostgreSQL, seller_pid):

@@ -16,9 +16,9 @@ def add_costumer(database, user_name, user_email, user_balance):
         print("[ERROR] Adding customer: ", user_name, user_email, user_balance)
         print(str(e))
     else:
-        print("[OK] Adding customer:", user_name, user_email, user_balance)
         database.conn.commit()
         cursor.close()
+        print("[OK] Adding customer:", user_name, user_email, user_balance)
 
 
 def populate_customers(database: PostgreSQL):

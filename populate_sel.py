@@ -16,9 +16,9 @@ def add_seller(database, name, email):
         print("[ERROR] Adding seller: ", name, email, 0)
         print(str(e))
     else:
-        print("[OK] Adding seller:", name, email, 0)
         database.conn.commit()
         cursor.close()
+        print("[OK] Adding seller:", name, email, 0)
 
 
 def populate_sellers(database: PostgreSQL):

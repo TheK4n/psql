@@ -27,9 +27,9 @@ def commit_transaction(database, customer_pid, item_pid):
         print(str(e))
         print("[ERROR] Committing transaction: ", item_pid, customer_pid)
     else:
-        print("[OK] Committing transaction:", item_pid, customer_pid)
         database.conn.commit()
         cursor.close()
+        print("[OK] Committing transaction:", item_pid, customer_pid)
 
 
 if __name__ == '__main__':
