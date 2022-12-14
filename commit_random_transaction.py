@@ -20,7 +20,7 @@ def get_random_item(database):
 def commit_transaction(database, customer_pid, item_pid):
     cursor = database.conn.cursor()
     try:
-        cursor.execute(SQL.transaction_buy.format(item_pid=item_pid, customer_pid=customer_pid))
+        cursor.execute(SQL.transaction_buy, {"item_pid":item_pid, "customer_pid":customer_pid})
     except psycopg2.DatabaseError as e:
         database.conn.rollback()
         cursor.close()

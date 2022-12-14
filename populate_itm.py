@@ -9,7 +9,7 @@ import random
 def add_item(database, name, price, seller_pid, amount):
     cursor = database.conn.cursor()
     try:
-        cursor.execute(SQL.add_item.format(name=name, price=price, seller_pid=seller_pid, amount=amount))
+        cursor.execute(SQL.add_item, {"name":name, "price":price, "seller_pid":seller_pid, "amount":amount})
     except psycopg2.DatabaseError as e:
         database.conn.rollback()
         cursor.close()
@@ -43,6 +43,6 @@ def populate_items_for_many_sellers(database):
 
 if __name__ == '__main__':
 
-    conn_data = ConnectionData(host="127.0.0.1", port=54321, dbname="shop", user="shop_admin", password="1234")
+    conn_data = ConnectionData(host="127.0.0.1", port=5432, dbname="shop", user="shop_admin", password="1234")
     db = PostgreSQL(conn_data)
     populate_items_for_many_sellers(db)

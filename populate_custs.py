@@ -9,7 +9,7 @@ import random
 def add_costumer(database, user_name, user_email, user_balance):
     cursor = database.conn.cursor()
     try:
-        cursor.execute(SQL.add_costumer.format(name=user_name, email=user_email, balance=user_balance))
+        cursor.execute(SQL.add_costumer, {"name":user_name, "email":user_email, "balance":user_balance, "password":"1234"})
     except psycopg2.DatabaseError as e:
         database.conn.rollback()
         cursor.close()
@@ -35,6 +35,6 @@ def populate_customers(database: PostgreSQL):
 
 if __name__ == '__main__':
 
-    conn_data = ConnectionData(host="127.0.0.1", port=54321, dbname="shop", user="shop_admin", password="1234")
+    conn_data = ConnectionData(host="127.0.0.1", port=5432, dbname="shop", user="shop_admin", password="1234")
     db = PostgreSQL(conn_data)
     populate_customers(db)

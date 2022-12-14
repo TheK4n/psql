@@ -9,7 +9,7 @@ import random
 def add_seller(database, name, email):
     cursor = database.conn.cursor()
     try:
-        cursor.execute(SQL.add_seller.format(name=name, email=email, balance=0))
+        cursor.execute(SQL.add_seller, {"name":name, "email":email, "balance":0})
     except psycopg2.DatabaseError as e:
         database.conn.rollback()
         cursor.close()
