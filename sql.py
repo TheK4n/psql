@@ -5,10 +5,10 @@ BEGIN;
     INSERT INTO orders(customer_pid, item_pid) VALUES(%(customer_pid)s, %(item_pid)s);
 
     -- minus item price from customer balance
-    UPDATE customers SET balance = balance - (SELECT price FROM items WHERE pid = %(item_pid)s) WHERE pid = %(customer_pid)s;
+    UPDATE customers SET balance = balance - (SELECT price FROM items WHERE pid = %(item_pid)s FOR UPDATE) WHERE pid = %(customer_pid)s;
 
     -- add item price to seller balance if item belongs to seller
-    UPDATE sellers SET balance = balance + (SELECT price FROM items WHERE pid = %(item_pid)s) WHERE pid = (SELECT seller_pid FROM items WHERE pid = %(item_pid)s);
+    UPDATE sellers SET balance = balance + (SELECT price FROM items WHERE pid = %(item_pid)s FOR UPDATE) WHERE pid = (SELECT seller_pid FROM items WHERE pid = %(item_pid)s FOR UPDATE);
 
     -- minus one of amount item
     UPDATE items SET amount = amount - 1 WHERE pid = %(item_pid)s;
