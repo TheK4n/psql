@@ -14,3 +14,6 @@ SELECT s.name, sum(i.price) AS order_sums FROM orders AS o INNER JOIN items AS i
 
 -- Колличество покупок товаров у конкретного продавца конкретным покупателем
 SELECT u.uid, s.uid, count(1) as interactions from customers as u inner join orders as o on u.pid = o.customer_pid inner join items as i on o.item_pid = i.pid inner join sellers as s on i.seller_pid = s.pid group by u.uid, s.uid order by interactions desc;
+
+-- Сумма всех трат
+SELECT sum(i.price) FROM items AS i INNER JOIN orders AS o ON o.item_pid = i.pid;
